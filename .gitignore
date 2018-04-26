@@ -1,0 +1,12 @@
+build/
+_build/
+dist/
+*.egg-info/
+*.egg
+*.py[cod]
+__pycache__/
+*~
+
+.cache
+.pytest_cache
+*.sqlite3
