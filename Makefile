@@ -1,6 +1,6 @@
 .PHONY: clean tests cov docs release
 
-VERSION = $(shell python -c "print(__import__('static_delivery').__version__)")
+VERSION = $(shell pipenv run python -c "print(__import__('static_delivery').__version__)")
 
 clean:
 	rm -fr docs/_build build/ dist/
@@ -20,6 +20,6 @@ docs:
 release:
 	@echo About to release ${VERSION}; read
 	pipenv run python setup.py sdist upload
-	python setup.py bdist_wheel upload
+	pipenv run python setup.py bdist_wheel upload
 	git tag -a "${VERSION}" -m "Version ${VERSION}" && git push --follow-tags
 
