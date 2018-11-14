@@ -9,7 +9,7 @@ All Contents
     :glob:
 
     installation
-    usage
+    advanced
     api
     changelog
 
