@@ -19,7 +19,7 @@ sphinx-rtd-theme = "*"
 
 [packages]
 
-django = ">=2.0"
+django = "*"
 
 
 [requires]

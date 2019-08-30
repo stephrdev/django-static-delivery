@@ -8,5 +8,6 @@ __pycache__/
 *~
 
 .cache
+.coverage
 .pytest_cache
 *.sqlite3
