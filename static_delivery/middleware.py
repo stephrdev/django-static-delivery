@@ -58,11 +58,8 @@ class StaticDeliveryMiddleware(object):
         static_path = self.path_re.match(request.path)
         if static_path:
             response = self.serve_response(request, static_path.group(1))
-
-            if not response:
-                raise Http404
-
-            return response
+            if response:
+                return response
 
         return self.get_response(request)
 

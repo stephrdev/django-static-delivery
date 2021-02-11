@@ -1,6 +1,6 @@
 import pytest
 from django.core.exceptions import ImproperlyConfigured
-from django.http import Http404, HttpResponse
+from django.http import HttpResponse
 
 from static_delivery.middleware import StaticDeliveryMiddleware
 
@@ -40,8 +40,9 @@ class TestMiddlewareCall:
         assert response['Content-Type'] == 'text/plain'
 
     def test_file_notfound(self, rf):
-        with pytest.raises(Http404):
-            self.middleware(rf.get('/static/notfound.txt'))
+        response = self.middleware(rf.get('/static/notfound.txt'))
+        assert response.status_code == 200
+        assert response.content == b'NOSTATIC'
 
     def test_file_hashed(self, rf):
         response = self.middleware(rf.get('/static/test_hash.11aa22bb33cc.jpg'))
@@ -54,8 +55,9 @@ class TestMiddlewareCall:
         assert response['Content-Type'] == 'image/jpeg'
 
     def test_file_unrecoverable(self, rf):
-        with pytest.raises(Http404):
-            self.middleware(rf.get('/static/notfound.44dd66eee899.jpg'))
+        response = self.middleware(rf.get('/static/notfound.44dd66eee899.jpg'))
+        assert response.status_code == 200
+        assert response.content == b'NOSTATIC'
 
 
 #
