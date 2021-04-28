@@ -5,16 +5,18 @@ django-static-delivery
    :target: https://pypi.python.org/pypi/django-static-delivery
    :alt: Latest Version
 
-.. image:: https://codecov.io/gh/moccu/django-static-delivery/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/moccu/django-static-delivery
+.. image:: https://github.com/stephrdev/django-static-delivery/workflows/Test/badge.svg?branch=master
+   :target: https://github.com/stephrdev/django-static-delivery/actions?workflow=Test
+   :alt: CI Status
+
+.. image:: https://codecov.io/gh/stephrdev/django-static-delivery/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/stephrdev/django-static-delivery
    :alt: Coverage Status
 
 .. image:: https://readthedocs.org/projects/django-static-delivery/badge/?version=latest
    :target: https://django-static-delivery.readthedocs.io/en/stable/?badge=latest
    :alt: Documentation Status
 
-.. image:: https://travis-ci.org/moccu/django-static-delivery.svg?branch=master
-   :target: https://travis-ci.org/moccu/django-static-delivery
 
 Usage
 -----
@@ -35,16 +37,15 @@ No other dependencies are required.
 Prepare for development
 -----------------------
 
-A Python 3.6 interpreter is required in addition to pipenv.
+A Python 3 interpreter is required in addition to poetry.
 
 .. code-block:: shell
 
-    $ pipenv install --python 3.6 --dev
-    $ pipenv run pip install -e .
+    $ poetry install
 
 
 Now you're ready to run the tests:
 
 .. code-block:: shell
 
-    $ pipenv run py.test
+    $ make tests

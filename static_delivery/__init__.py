@@ -1,4 +1,10 @@
-from .middleware import StaticDeliveryMiddleware  # noqa
+try:
+    import importlib.metadata as importlib_metadata
+except ModuleNotFoundError:
+    # This is required for Python versions < 3.8
+    import importlib_metadata
 
-
-__version__ = '0.0.2'
+try:
+    __version__ = importlib_metadata.version('django-static-delivery')
+except Exception:
+    __version__ = 'HEAD'
