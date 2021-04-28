@@ -25,6 +25,7 @@ class StaticDeliveryMiddleware(object):
     If a file with a certain hash is unavailable, the middleware will try to
     look up the correct hash for the file.
     """
+
     HASHED_PATH_RE = re.compile(r'(.+)(\.[0-9a-f]{12})(\.?)(\w+)?$')
 
     #: The middleware instance has a regex ready to match paths against STATIC_URL.
@@ -37,14 +38,16 @@ class StaticDeliveryMiddleware(object):
         self.get_response = get_response
 
         if not (
-            settings.STATIC_URL.startswith('/') and  # Is a relative path
-            not settings.STATIC_URL.startswith('//')  # No schemaless absolute path
+            settings.STATIC_URL.startswith('/')
+            and not settings.STATIC_URL.startswith(  # Is a relative path
+                '//'
+            )  # No schemaless absolute path
         ):
             raise ImproperlyConfigured(
-                '`static_delivery` currently only works with same-domain static urls')
+                '`static_delivery` currently only works with same-domain static urls'
+            )
 
-        self.path_re = re.compile(
-            r'^/{0}(.*)$'.format(settings.STATIC_URL.strip('/')))
+        self.path_re = re.compile(r'^/{0}(.*)$'.format(settings.STATIC_URL.strip('/')))
         self.manifest = self.load_staticfiles_manifest()
 
     def __call__(self, request):
@@ -77,8 +80,7 @@ class StaticDeliveryMiddleware(object):
 
         recovered_path = self.recover_staticfile_path(path)
 
-        return self.get_staticfile_response(
-            request, recovered_path) if recovered_path else None
+        return self.get_staticfile_response(request, recovered_path) if recovered_path else None
 
     def get_staticfile_response(self, request, path):
         """
@@ -101,11 +103,14 @@ class StaticDeliveryMiddleware(object):
         if not parsed_path:
             return None
 
-        return self.manifest.get('{}{}{}'.format(
-            parsed_path.group(1) or '',
-            parsed_path.group(3) or '',
-            parsed_path.group(4) or ''
-        ).strip('/'), None)
+        return self.manifest.get(
+            '{}{}{}'.format(
+                parsed_path.group(1) or '',
+                parsed_path.group(3) or '',
+                parsed_path.group(4) or '',
+            ).strip('/'),
+            None,
+        )
 
     def load_staticfiles_manifest(self):
         """
@@ -120,6 +125,7 @@ class StaticDeliveryMiddleware(object):
 
         if not hasattr(storage, 'load_manifest'):
             raise ImproperlyConfigured(
-                'The configured staticfiles storage has no support for manifest data.')
+                'The configured staticfiles storage has no support for manifest data.'
+            )
 
         return storage.load_manifest()
