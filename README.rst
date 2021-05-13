@@ -2,7 +2,7 @@ django-static-delivery
 ======================
 
 .. image:: https://img.shields.io/pypi/v/django-static-delivery.svg
-   :target: https://pypi.python.org/pypi/django-static-delivery
+   :target: https://pypi.org/project/django-static-delivery/
    :alt: Latest Version
 
 .. image:: https://github.com/stephrdev/django-static-delivery/workflows/Test/badge.svg?branch=master
