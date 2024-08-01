@@ -128,4 +128,10 @@ class StaticDeliveryMiddleware(object):
                 'The configured staticfiles storage has no support for manifest data.'
             )
 
-        return storage.load_manifest()
+        loaded_manifest = storage.load_manifest()
+
+        # Django >=4.2 return a tuple with paths and hashed instead off only the paths.
+        if isinstance(loaded_manifest, tuple):
+            return loaded_manifest[0]
+
+        return loaded_manifest
