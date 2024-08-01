@@ -22,6 +22,7 @@ def test_invalid_static_storage_setting(settings):
 
 
 class TestMiddlewareCall:
+    @pytest.fixture(autouse=True)
     def setup(self):
         self.middleware = StaticDeliveryMiddleware(lambda r: HttpResponse(b'NOSTATIC'))
 

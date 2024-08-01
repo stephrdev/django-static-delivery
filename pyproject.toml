@@ -35,7 +35,7 @@ pytest-django = ">=4.2"
 pytest-flake8 = ">=1.0"
 pytest-isort = ">=2.0"
 pytest-black = ">=0.3"
-flake8 = "<5"
+flake8 = "<6"
 coverage = {version = ">=5.5", extras = ["toml"]}
 
 [tool.poetry.extras]
