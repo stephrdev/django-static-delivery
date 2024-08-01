@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-static-delivery"
-version = "0.0.3"
+version = "0.0.4"
 description = "A middleware to delivery static files in Django."
 authors = [
 	"Stephan Jaekel <steph@rdev.info>",
