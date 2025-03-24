@@ -1,3 +1,4 @@
+import django
 import pytest
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponse
@@ -16,7 +17,13 @@ def test_invalid_static_url_setting(settings):
 
 
 def test_invalid_static_storage_setting(settings):
-    settings.STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    if django.VERSION[:2] >= (4, 2):
+        settings.STORAGES = {
+            'staticfiles': {'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage'}
+        }
+    else:
+        settings.STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
     with pytest.raises(ImproperlyConfigured):
         StaticDeliveryMiddleware(None)
 

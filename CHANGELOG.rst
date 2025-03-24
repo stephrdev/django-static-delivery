@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.0.0 - 2025-03-24
+------------------
+
+* Drop support for Python < 3.10
+* Drop support for Django < 3.2
+* Add support for Django 5.1
+
+
 0.0.4 - 2024-08-01
 ------------------
 

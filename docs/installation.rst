@@ -34,7 +34,11 @@ storage with hashed file names, for example ``ManifestStaticFilesStorage``.
     # Public base path to access files in STATIC_ROOT
     STATIC_URL = '/static/'
 
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+    STORAGES = {
+        'staticfiles': {
+            'BACKEND': 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+        }
+    }
 
 
 Thats it, now continue to the :doc:`Advanced topics section <advanced>` to learn

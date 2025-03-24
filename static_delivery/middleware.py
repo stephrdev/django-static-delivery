@@ -3,7 +3,6 @@ import re
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.http.response import Http404
-from django.utils.module_loading import import_string
 from django.views.static import serve
 
 
@@ -120,15 +119,14 @@ class StaticDeliveryMiddleware(object):
         In addition, this method might raise an exception if the configured
         staticfiles storage doesn't support manifest files/data.
         """
-        storage_module = import_string(settings.STATICFILES_STORAGE)
-        storage = storage_module()
+        from django.contrib.staticfiles.storage import staticfiles_storage
 
-        if not hasattr(storage, 'load_manifest'):
+        if not hasattr(staticfiles_storage, 'load_manifest'):
             raise ImproperlyConfigured(
                 'The configured staticfiles storage has no support for manifest data.'
             )
 
-        loaded_manifest = storage.load_manifest()
+        loaded_manifest = staticfiles_storage.load_manifest()
 
         # Django >=4.2 return a tuple with paths and hashed instead off only the paths.
         if isinstance(loaded_manifest, tuple):
