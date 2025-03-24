@@ -14,7 +14,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.10", "3.11"]
     steps:
       - uses: "actions/checkout@v4"
       - uses: "actions/setup-python@v5"
@@ -24,7 +24,7 @@ jobs:
         run: |
           set -xe
           python -m pip install --upgrade pip setuptools
-          python -m pip install --upgrade poetry tox tox-gh-actions coverage
+          python -m pip install --upgrade poetry poetry-plugin-export tox tox-gh-actions coverage
 
       - name: "Run tox targets for ${{ matrix.python-version }}"
         run: "python -m tox"
