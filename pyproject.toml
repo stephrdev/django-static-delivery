@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-static-delivery"
-version = "1.0.0"
+version = "1.0.1"
 description = "A middleware to delivery static files in Django."
 authors = [
 	"Stephan Jaekel <steph@rdev.info>",
@@ -27,7 +27,6 @@ python = ">=3.10,<4"
 
 Django = ">=3.2"
 Sphinx = {version = ">=3.5", optional = true}
-poetry-plugin-export = "^1.9.0"
 
 [tool.poetry.dev-dependencies]
 pytest = ">=6.2"
